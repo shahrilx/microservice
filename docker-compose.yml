@@ -13,7 +13,7 @@ services:
     depends_on:
       - quotes
     ports:
-      - "3000:3000"
+      - "8000:3000"
   frontend:
     build:
       context: ./FrontendApplication
