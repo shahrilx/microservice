@@ -13,11 +13,11 @@ services:
     depends_on:
       - quotes
     ports:
-      - "8000:3000"
+      - "4000:4000"
   frontend:
     build:
       context: ./FrontendApplication
       dockerfile: app.dockerfile
     ports:
-      - "8080:80"
+      - "8000:80"
     
