@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: api-gateway
+  name: api-gateway
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: api-gateway
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: api-gateway
+    spec:
+      containers:
+      - image: shahrilx/api:latest
+        name: api-gateway
+        ports:
+        - containerPort: 4000
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: api-gateway-svc
+spec:
+  type: NodePort
+  selector:
+    app: api-gateway  # Match the labels from your pod
+  ports:
+    - port: 4000  # Port exposed on the service
+      targetPort: 4000  # Port on the container to forward traffic to
+      nodePort: 30081  # NodePort value (between 30000-32767)
+
