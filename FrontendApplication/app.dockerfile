@@ -1,4 +1,4 @@
-FROM nginx:1.10
+FROM nginx:stable-perl
 
 ADD vhost.conf /etc/nginx/conf.d/default.conf
 
