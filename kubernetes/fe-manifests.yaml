@@ -1,0 +1,40 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  creationTimestamp: null
+  labels:
+    app: frontend
+  name: frontend
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: frontend
+  strategy: {}
+  template:
+    metadata:
+      creationTimestamp: null
+      labels:
+        app: frontend
+    spec:
+      containers:
+      - image: shahrilx/frontend:latest
+        name: frontend
+        ports:
+        - containerPort: 80
+        resources: {}
+status: {}
+---
+apiVersion: v1
+kind: Service
+metadata:
+  name: fe-service
+spec:
+  type: NodePort
+  selector:
+    app: frontend  # Match the labels from your pod
+  ports:
+    - port: 80  # Port exposed on the service
+      targetPort: 80  # Port on the container to forward traffic to
+      nodePort: 30080  # NodePort value (between 30000-32767)
+
