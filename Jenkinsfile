@@ -1,5 +1,8 @@
 pipeline {
   agent any
+  environment {
+        KUBECONFIG = credentials('kubeconfig')
+    }
   stages {
     stage('Cleaning Workspace') {
       steps {
@@ -59,7 +62,7 @@ pipeline {
     }
     stage('Deploy To Production') {
       steps {
-        echo 'deploy'
+        sh 'kubectl apply -f kubernetes/.'
       }
     }
 
