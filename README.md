@@ -10,7 +10,7 @@ A very simple microservice example with NodeJS, Python and Docker
 
 - Run `docker-compose up` to start the services.
 
-- Try `GET http://YOUR_HOST:4000/api/status` to check whether application is running.
+- Try `GET http://YOUR_HOST:4000/api/status` to check whether application is runnings.
 
 ## Build the frontend
 
