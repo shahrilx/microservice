@@ -1,12 +1,11 @@
 groups:
   - name: jenkins-alerts
     rules:
-      - alert: JenkinsJobStopped
-        expr: |
-          (count by (job_name) (jenkins_job_last_build_result == 1) > 0)
+      - alert: JenkinsJobFailed
+        expr: default_jenkins_builds_last_build_result{buildable="true"} == 0
         for: 5m
         labels:
           severity: critical
         annotations:
-          summary: "Jenkins Job Stopped"
-          description: "The Jenkins job {{ $labels.job_name }} has stopped or failed."
+          summary: "Jenkins Job Failed"
+          description: "The Jenkins job {{ $labels.jenkins_job }} has failed."
