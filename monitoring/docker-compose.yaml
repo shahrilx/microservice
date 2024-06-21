@@ -1,0 +1,42 @@
+version: '3'
+services:
+  prometheus:
+    image: prom/prometheus
+    volumes:
+      - "./prometheus.yml:/etc/prometheus/prometheus.yml"
+      - "./rules.yml:/etc/prometheus/rules.yml"
+    extra_hosts:
+      - "host.docker.internal:host-gateway"
+    networks:
+      - localprom
+    ports:
+      - 9090:9090
+  node-exporter:
+    image: prom/node-exporter
+    networks:
+      - localprom
+    ports:
+      - 9100:9100
+  alert-manager:
+    image: prom/alertmanager
+    volumes:
+      - "./alertmanager.yml:/alertmanager/alertmanager.yml"
+    networks:
+      - localprom
+    ports:
+      - 9093:9093
+  grafana:
+    image: grafana/grafana
+    networks:
+      - localprom
+    ports:
+      - 3000:3000
+    environment:
+      - GF_SECURITY_ADMIN_PASSWORD=admin1
+    volumes:
+      - grafana-storage:/var/lib/grafana
+networks:
+  localprom:
+    driver: bridge
+volumes:
+  grafana-storage:
