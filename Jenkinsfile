@@ -16,7 +16,7 @@ pipeline {
     }
     stage('Filesystem Check') {
       steps {
-        sh 'trivy fs . > /var/lib/jenkins/security_report/filesystem_report.txt'
+        sh 'trivy fs --skip-db-update . > /var/lib/jenkins/security_report/filesystem_report.txt'
       }
     }
     stage('Building Images and Starting Containers') {
@@ -26,9 +26,9 @@ pipeline {
     }
         stage('Image Vulnerabilities Check') {
       steps {
-        sh 'trivy image shahrilx/frontend > /var/lib/jenkins/security_report/web-app-frontend-vul.txt'
-        sh 'trivy image shahrilx/api > /var/lib/jenkins/security_report/web-app-api-vul.txt'
-        sh 'trivy image  shahrilx/quotes > /var/lib/jenkins/security_report/web-app-quotes-vul.txt'
+        sh 'trivy image --skip-db-update shahrilx/frontend > /var/lib/jenkins/security_report/web-app-frontend-vul.txt'
+        sh 'trivy image --skip-db-update shahrilx/api > /var/lib/jenkins/security_report/web-app-api-vul.txt'
+        sh 'trivy image --skip-db-update shahrilx/quotes > /var/lib/jenkins/security_report/web-app-quotes-vul.txt'
       }
     }
     stage('Testing The Apps') {
