@@ -4,7 +4,7 @@ FRONTEND_BASE_URL="http://localhost:8000"
 API_BASE_URL="http://localhost:4000/api/status"
 
 frontend_test() {
-  echo "Testing frontend page..."
+  echo "Testing frontend page"
   response=$(curl -s -o /dev/null -w "%{http_code}" $FRONTEND_BASE_URL)
   if [ "$response" -eq 200 ]; then
     echo "Frontend test passed."
