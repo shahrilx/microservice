@@ -33,9 +33,9 @@ pipeline {
     }
     stage('Testing The Apps') {
       steps {
-        sh 'curl localhost:8000'
         sleep(5)
-        sh 'curl localhost:4000/api/status'
+        sh 'chmod +x testing_phase.sh'
+        sh './testing_phase.sh'
       }
     }
     stage('Push Image') {
@@ -52,7 +52,7 @@ pipeline {
         }
       }
     }
-    stage('Clean Container and Image') {
+    stage('Cleaning Test Environment') {
       steps {
         sh 'docker compose down'
         sh 'docker rmi shahrilx/frontend:latest'
