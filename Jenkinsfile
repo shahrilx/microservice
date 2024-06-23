@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Building Images and Starting Containers') {
       steps {
-        sh 'docker compose u -d'
+        sh 'docker compose up -d'
       }
     }
         stage('Image Vulnerabilities Check') {
