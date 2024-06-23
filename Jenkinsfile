@@ -28,11 +28,11 @@ pipeline {
         stage('Image Vulnerabilities Check') {
       steps {
         sh 'trivy image --skip-db-update shahrilx/frontend > /var/lib/jenkins/security_report/frontend-vul.txt'
-        sh 'cat /var/lib/jenkins/security_report/web-app-frontend-vul.txt | grep Total'
+        sh 'cat /var/lib/jenkins/security_report/frontend-vul.txt | grep Total'
         sh 'trivy image --skip-db-update shahrilx/api > /var/lib/jenkins/security_report/api-vul.txt'
-        sh 'cat /var/lib/jenkins/security_report/web-app-api-vul.txt | grep Total'
+        sh 'cat /var/lib/jenkins/security_report/api-vul.txt | grep Total'
         sh 'trivy image --skip-db-update shahrilx/quotes > /var/lib/jenkins/security_report/quotes-vul.txt'
-        sh 'cat /var/lib/jenkins/security_report/web-app-quotes-vul.txt | grep Total'
+        sh 'cat /var/lib/jenkins/security_report/quotes-vul.txt | grep Total'
       }
     }
     stage('Testing The Apps') {
