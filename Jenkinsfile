@@ -57,9 +57,9 @@ pipeline {
       steps {
         script {
             docker.withRegistry('https://index.docker.io/v1/',registryCredential){
-               sh 'docker push shahrilx/frontend:latest' 
-               sh 'docker push shahrilx/api:latest' 
-               sh 'docker push shahrilx/quotes:latest' 
+               sh "docker push shahrilx/frontend:$BUILD_NUMBER"
+               sh "docker push shahrilx/api:$BUILD_NUMBER"
+               sh "docker push shahrilx/quotes:$BUILD_NUMBER" 
             }
         }
       }
