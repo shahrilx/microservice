@@ -52,15 +52,15 @@ pipeline {
 
     stage('Push Image') {
       steps {
-        sh "docker push 128.199.97.48:31735/frontend:$BUILD_NUMBER && docker push 128.199.97.48:31735/api:$BUILD_NUMBER && docker push 128.199.97.48:31735/quotes:$BUILD_NUMBER"
+        sh "docker push shahrilx/frontend:$BUILD_NUMBER && docker push shahrilx/api:$BUILD_NUMBER && docker push shahrilx/quotes:$BUILD_NUMBER"
     }
     }
     stage('Cleaning Test Environment') {
       steps {
         sh 'docker compose down'
-        sh "docker rmi 128.199.97.48:31735/frontend:$BUILD_NUMBER"
-        sh "docker rmi 128.199.97.48:31735/api:$BUILD_NUMBER"
-        sh "docker rmi 128.199.97.48:31735/quotes:$BUILD_NUMBER"
+        sh "docker rmi shahrilx/frontend:$BUILD_NUMBER"
+        sh "docker rmi shahrilx/api:$BUILD_NUMBER"
+        sh "docker rmi shahrilx/quotes:$BUILD_NUMBER"
       }
     }
     stage('Deploy To Production') {
