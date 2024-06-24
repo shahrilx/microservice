@@ -18,7 +18,7 @@ spec:
         app: api-gateway
     spec:
       containers:
-      - image: shahrilx/api:latest
+      - image: shahrilx/api:@BUILD_NUMBER
         name: api-gateway
         ports:
         - containerPort: 4000
