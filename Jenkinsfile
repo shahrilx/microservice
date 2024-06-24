@@ -51,9 +51,18 @@ pipeline {
     }
 
     stage('Push Image') {
+      environment{
+        registryCredential = 'dockerhub'
+      }
       steps {
-        sh "docker push shahrilx/frontend:$BUILD_NUMBER && docker push shahrilx/api:$BUILD_NUMBER && docker push shahrilx/quotes:$BUILD_NUMBER"
-    }
+        script {
+            docker.withRegistry('https://index.docker.io/v1/',registryCredential){
+               sh 'docker push shahrilx/frontend:latest' 
+               sh 'docker push shahrilx/api:latest' 
+               sh 'docker push shahrilx/quotes:latest' 
+            }
+        }
+      }
     }
     stage('Cleaning Test Environment') {
       steps {
