@@ -11,7 +11,7 @@ pipeline {
     }
     stage('Clone Repository') {
       steps {
-        git(url: 'https://github.com/shahrilx/microservice.git', branch: 'main')
+        git(url: 'https://github.com/muhd-zunurain/microservice.git', branch: 'main')
       }
     }
     stage('Filesystem Check') {
@@ -20,6 +20,13 @@ pipeline {
         sh 'cat /var/lib/jenkins/security_report/filesystem_report.txt | grep Total'
       }
     }
+
+    stage('Replace Placholder') {
+      steps {
+        sh "sed -i 's/@BUILD_NUMBER/$BUILD_NUMBER/g' docker-compose.yml"
+      }
+    }
+    
     stage('Building Images and Starting Containers') {
       steps {
         sh 'docker compose up -d'
@@ -42,26 +49,18 @@ pipeline {
         sh './testing_phase.sh'
       }
     }
+
     stage('Push Image') {
-      environment{
-        registryCredential = 'dockerhub'
-      }
       steps {
-        script {
-            docker.withRegistry('https://index.docker.io/v1/',registryCredential){
-               sh 'docker push shahrilx/frontend:latest' 
-               sh 'docker push shahrilx/api:latest' 
-               sh 'docker push shahrilx/quotes:latest' 
-            }
-        }
-      }
+        sh "docker push 128.199.97.48:31735/frontend:$BUILD_NUMBER && docker push 128.199.97.48:31735/api:$BUILD_NUMBER && docker push 128.199.97.48:31735/quotes:$BUILD_NUMBER"
+    }
     }
     stage('Cleaning Test Environment') {
       steps {
         sh 'docker compose down'
-        sh 'docker rmi shahrilx/frontend:latest'
-        sh 'docker rmi shahrilx/api:latest'
-        sh 'docker rmi shahrilx/quotes:latest'
+        sh "docker rmi 128.199.97.48:31735/frontend:$BUILD_NUMBER"
+        sh "docker rmi 128.199.97.48:31735/api:$BUILD_NUMBER"
+        sh "docker rmi 128.199.97.48:31735/quotes:$BUILD_NUMBER"
       }
     }
     stage('Deploy To Production') {

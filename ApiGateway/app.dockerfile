@@ -1,5 +1,5 @@
 # Use official node image from docker
-FROM node:alpine3.20
+FROM public.ecr.aws/docker/library/node:18.20-bookworm-slim
 # Create application directory
 RUN mkdir -p /usr/src/app
 

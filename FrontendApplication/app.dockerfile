@@ -1,4 +1,4 @@
-FROM nginx:stable-perl
+FROM public.ecr.aws/nginx/nginx:stable-perl
 
 ADD vhost.conf /etc/nginx/conf.d/default.conf
 
