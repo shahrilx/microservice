@@ -18,11 +18,14 @@ spec:
         app: api-gateway
     spec:
       containers:
-      - image: shahrilx/api:latest
+      - image: shahrilx/api:@BUILD_NUMBER
         name: api-gateway
         ports:
         - containerPort: 4000
         resources: {}
+        env:
+        - name: QUOTES_API
+          value: "http://quotes-svc:5000"
 status: {}
 ---
 apiVersion: v1

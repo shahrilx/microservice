@@ -1,5 +1,5 @@
 # Select official python 3 runtime
-FROM python:3.10.14-alpine3.20
+FROM public.ecr.aws/docker/library/python:alpine3.20
 
 # Creates a directory in /usr/src/app
 RUN mkdir -p /usr/src/app
