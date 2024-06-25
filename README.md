@@ -4,7 +4,7 @@ A very simple microservice example with NodeJS, Python and Docker
 
 ## Run the API gateway
 
-- Install `docker` and `docker-compose` according to your operating system
+- Install `Jenkins`, `Trivy`, `docker` and `docker-compose` according to your operating system
 
 - Clone the repository and navigate to it
 
