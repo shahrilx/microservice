@@ -2,6 +2,7 @@ pipeline {
   agent any
   environment {
         KUBECONFIG = credentials('kubeconfig')
+        DOCKER_IMAGE_TAG = "${env.BUILD_NUMBER}"
     }
   stages {
     stage('Cleaning Workspace') {
