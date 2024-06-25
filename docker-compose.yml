@@ -1,12 +1,12 @@
 version: '2'
 services:
   quotes:
-    image: shahrilx/quotes:@BUILD_NUMBER
+    image: shahrilx/quotes:${DOCKER_IMAGE_TAG}
     build:
       context: ./QuoteService
       dockerfile: app.dockerfile
   api:
-    image: shahrilx/api:@BUILD_NUMBER
+    image: shahrilx/api:${DOCKER_IMAGE_TAG}
     build:
       context: ./ApiGateway
       dockerfile: app.dockerfile
@@ -17,7 +17,7 @@ services:
     ports:
       - "4000:4000"
   frontend:
-    image: shahrilx/frontend:@BUILD_NUMBER
+    image: shahrilx/frontend:${DOCKER_IMAGE_TAG}
     build:
       context: ./FrontendApplication
       dockerfile: app.dockerfile
