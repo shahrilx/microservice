@@ -23,6 +23,9 @@ spec:
         ports:
         - containerPort: 4000
         resources: {}
+        env:
+        - name: QUOTES_API
+          value: "http://quotes-svc:5000"
 status: {}
 ---
 apiVersion: v1
