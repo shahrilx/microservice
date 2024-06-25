@@ -22,7 +22,7 @@ pipeline {
       }
     }
 
-    stage('Replace Placholder') {
+    stage('Replace Placeholder') {
       steps {
         sh "sed -i 's/@BUILD_NUMBER/$BUILD_NUMBER/g' docker-compose.yml kubernetes/*"
       }
