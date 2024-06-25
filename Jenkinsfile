@@ -22,7 +22,7 @@ pipeline {
     }
     stage('Building Images and Starting Containers') {
       steps {
-        sh 'docker compose up -d'
+        sh 'docker compose build --no-cache && docker compose up -d'
       }
     }
         stage('Image Vulnerabilities Check') {
